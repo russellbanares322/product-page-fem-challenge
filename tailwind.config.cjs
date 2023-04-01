@@ -4,7 +4,7 @@ module.exports = {
     extend: {},
     screens: {
       sm: "24em",
-      md: "75em",
+      md: "70em",
     },
     colors: {
       orange: "hsl(26, 100%, 55%)",

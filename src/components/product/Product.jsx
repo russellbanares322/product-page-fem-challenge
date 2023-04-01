@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { imageData } from "../../data/ImageData";
 import iconMinus from "../../assets/icon-minus.svg";
 import iconPlus from "../../assets/icon-plus.svg";
 import iconCart from "../../assets/icon-cart.svg";
+import ProductContext from "../../context/ProductContext";
 
 const Product = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const selectedImage = imageData[imageIndex].image;
+  const { quantity, setQuantity } = useContext(ProductContext);
 
   const handleSelectImage = (selectedImageIndex) => {
     setImageIndex(selectedImageIndex);
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+  const handleDecreaseQuantity = () => {
+    setQuantity((prev) => prev - 1);
   };
 
   return (
@@ -17,16 +26,16 @@ const Product = () => {
       <div className="flex flex-col justify-center items-center gap-5">
         <div>
           <img
-            className="rounded-md w-[25rem] h-[24rem] object-cover"
+            className="rounded-md w-[23rem] h-[22rem] object-cover"
             src={selectedImage}
           />
         </div>
-        <div className="flex justify-center items-center gap-7">
+        <div className="flex justify-center items-center gap-4">
           {imageData.map((img, index) => (
-            <div key={index}>
+            <div className="relative" key={index}>
               <img
                 onClick={() => handleSelectImage(index)}
-                className={`rounded-md w-20 h-20 object-cover cursor-pointer ${
+                className={`rounded-md w-20 h-20 object-cover cursor-pointer hover:opacity-50 ${
                   index === imageIndex && "border-2 border-orange"
                 }`}
                 src={img.thumbnail}
@@ -56,16 +65,25 @@ const Product = () => {
         </p>
         <div className="flex justify-start items-center gap-3 h-[6rem] text-[0.9rem] font-bold">
           <div className="flex justify-center items-center gap-2">
-            <button className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center">
+            <button
+              disabled={quantity === 0 ? true : false}
+              onClick={handleDecreaseQuantity}
+              className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center"
+            >
               <img src={iconMinus} />
             </button>
-            <button className="bg-light-grayish-blue w-12 h-12">0</button>
-            <button className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center text-orange">
+            <button className="bg-light-grayish-blue w-12 h-12">
+              {quantity}
+            </button>
+            <button
+              onClick={handleIncreaseQuantity}
+              className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center text-orange"
+            >
               <img src={iconPlus} />
             </button>
           </div>
-          <button className="text-white bg-orange w-full h-12 rounded-md flex justify-center items-center gap-3">
-            <img className="h-4 w-4 stroke-white" src={iconCart} />
+          <button className="hover:opacity-50 text-white bg-orange w-full h-12 rounded-md flex justify-center items-center gap-3">
+            <img className="h-4 w-4 stroke-current text-white" src={iconCart} />
             Add to cart
           </button>
         </div>
