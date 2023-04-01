@@ -5,11 +5,16 @@ import avatar from "../../assets/image-avatar.png";
 import menu from "../../assets/icon-menu.svg";
 import close from "../../assets/icon-close.svg";
 import ProductContext from "../../context/ProductContext";
+import productImg from "../../assets/image-product-1-thumbnail.jpg";
+import deleteIcon from "../../assets/icon-delete.svg";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { quantity } = useContext(ProductContext);
+  const { quantity, isAddedToCart, setIsAddedToCart, setQuantity } =
+    useContext(ProductContext);
+  const productPrice = 125;
+  const multipliedProductPrice = 125 * quantity;
 
   const navListStyle =
     "cursor-pointer hover:text-black relative hover:before:absolute hover:before:bottom-[-33px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
@@ -21,6 +26,11 @@ const Navbar = () => {
   const handleToggleCart = (e) => {
     e.stopPropagation();
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handleRemoveToCart = () => {
+    setIsAddedToCart(false);
+    setQuantity(0);
   };
 
   return (
@@ -54,8 +64,6 @@ const Navbar = () => {
       <div className="flex justify-center items-center">
         <div className="relative">
           <img
-            onBlur={() => setIsCartOpen(false)}
-            tabIndex={0}
             onClick={handleToggleCart}
             className="fill-orange cursor-pointer w-5 h-5"
             src={cart}
@@ -69,14 +77,54 @@ const Navbar = () => {
             </p>
           )}
           {isCartOpen && (
-            <div className="absolute top-10 h-[12rem] w-[18rem] shadow-2xl right-[-5px] md:right-[-100px] bg-white rounded-md">
+            <div
+              className={`absolute top-10 ${
+                !isAddedToCart && quantity === 0 ? "h-[11rem]" : "h-auto"
+              }  w-[18rem] shadow-2xl right-[-5px] md:right-[-100px] bg-white rounded-md`}
+            >
               <p className="font-bold border-b border-grayish-blue p-3 border-opacity-50">
                 Cart
               </p>
-              <div>
-                <p className="flex justify-center items-center mt-14 font-bold text-dark-grayish-blue text-sm">
-                  Your cart is empty.
-                </p>
+              <div
+                className={`${
+                  !isAddedToCart && quantity === 0 ? "h-[11rem]" : "h-auto"
+                }`}
+              >
+                {!isAddedToCart && quantity === 0 && (
+                  <p className="flex justify-center items-center mt-14 font-bold text-dark-grayish-blue text-sm">
+                    Your cart is empty.
+                  </p>
+                )}
+                {!!isAddedToCart && quantity > 0 && (
+                  <div className="py-4 px-3">
+                    <div className="flex justify-evenly items-center">
+                      <img
+                        className=" rounded-md  object-cover h-12 w-12"
+                        src={productImg}
+                      />
+                      <div>
+                        <p className="text-sm text-dark-grayish-blue">
+                          Fall Limited Edition Sneakers
+                        </p>
+                        <div className="flex justify-start items-center gap-2">
+                          <p>${productPrice}.00</p>
+                          <p>x {quantity}</p>
+                          <p className="font-bold">
+                            ${multipliedProductPrice}.00
+                          </p>
+                        </div>
+                      </div>
+                      <img
+                        onClick={handleRemoveToCart}
+                        className="w-3 h-4 cursor-pointer"
+                        src={deleteIcon}
+                      />
+                    </div>
+                    <button className="w-full bg-orange text-white my-4 h-11 rounded-md">
+                      Checkout
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}

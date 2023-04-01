@@ -8,17 +8,29 @@ import ProductContext from "../../context/ProductContext";
 const Product = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const selectedImage = imageData[imageIndex].image;
-  const { quantity, setQuantity } = useContext(ProductContext);
+  const { quantity, setQuantity, setIsAddedToCart } =
+    useContext(ProductContext);
 
   const handleSelectImage = (selectedImageIndex) => {
     setImageIndex(selectedImageIndex);
   };
 
+  const handleAddToCart = () => {
+    setIsAddedToCart(true);
+    setQuantity((prev) => prev + 1);
+  };
+
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
+    if (quantity >= 1) {
+      setIsAddedToCart(true);
+    }
   };
   const handleDecreaseQuantity = () => {
     setQuantity((prev) => prev - 1);
+    if (quantity <= 1) {
+      setIsAddedToCart(false);
+    }
   };
 
   return (
@@ -82,7 +94,10 @@ const Product = () => {
               <img src={iconPlus} />
             </button>
           </div>
-          <button className="hover:opacity-50 text-white bg-orange w-full h-12 rounded-md flex justify-center items-center gap-3">
+          <button
+            onClick={handleAddToCart}
+            className="hover:opacity-50 text-white bg-orange w-full h-11 rounded-md flex justify-center items-center gap-3"
+          >
             <img className="h-4 w-4 stroke-current text-white" src={iconCart} />
             Add to cart
           </button>
