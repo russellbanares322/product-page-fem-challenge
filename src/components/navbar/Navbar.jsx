@@ -62,7 +62,11 @@ const Navbar = () => {
         <li className={navListStyle}>Contact</li>
       </ul>
       <div className="flex justify-center items-center">
-        <div className="relative">
+        <div
+          tabIndex={0}
+          onBlur={() => setIsCartOpen(false)}
+          className="relative"
+        >
           <img
             onClick={handleToggleCart}
             className="fill-orange cursor-pointer w-5 h-5"
