@@ -17,6 +17,18 @@ const Product = () => {
     setImageIndex(selectedImageIndex);
   };
 
+  const handleNextImage = () => {
+    const isLastSlide = imageIndex === imageData.length - 1;
+    const newIndex = isLastSlide ? 0 : imageIndex + 1;
+    setImageIndex(newIndex);
+  };
+
+  const handlePrevImage = () => {
+    const isFirstSlide = imageIndex === 0;
+    const newIndex = isFirstSlide ? imageData.length - 1 : imageIndex - 1;
+    setImageIndex(newIndex);
+  };
+
   const handleAddToCart = () => {
     setIsAddedToCart(true);
     setQuantity((prev) => prev + 1);
@@ -122,6 +134,8 @@ const Product = () => {
       </div>
       {isModalOpen && (
         <ImageModal
+          handleNextImage={handleNextImage}
+          handlePrevImage={handlePrevImage}
           selectedImage={selectedImage}
           setIsModalOpen={setIsModalOpen}
           handleSelectImage={handleSelectImage}

@@ -9,6 +9,8 @@ const ImageModal = ({
   setIsModalOpen,
   handleSelectImage,
   imageIndex,
+  handleNextImage,
+  handlePrevImage,
 }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -28,10 +30,16 @@ const ImageModal = ({
             className="w-[27rem] h-[26rem] object-cover rounded-xl"
             src={selectedImage}
           />
-          <div className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute left-[-25px] top-[185px] flex items-center justify-center">
+          <div
+            onClick={handlePrevImage}
+            className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute left-[-25px] top-[185px] flex items-center justify-center"
+          >
             <img className="mr-1" src={iconPrev} />
           </div>
-          <div className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute right-[-25px] top-[185px] flex items-center justify-center">
+          <div
+            onClick={handleNextImage}
+            className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute right-[-25px] top-[185px] flex items-center justify-center"
+          >
             <img className="ml-1" src={iconNext} />
           </div>
         </div>
