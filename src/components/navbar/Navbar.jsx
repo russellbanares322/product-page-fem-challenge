@@ -10,9 +10,14 @@ import deleteIcon from "../../assets/icon-delete.svg";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const { quantity, isAddedToCart, setIsAddedToCart, setQuantity } =
-    useContext(ProductContext);
+  const {
+    quantity,
+    isAddedToCart,
+    setIsAddedToCart,
+    setQuantity,
+    isCartOpen,
+    setIsCartOpen,
+  } = useContext(ProductContext);
   const productPrice = 125;
   const multipliedProductPrice = 125 * quantity;
 
@@ -99,7 +104,7 @@ const Navbar = () => {
                     Your cart is empty.
                   </p>
                 )}
-                {!!isAddedToCart && quantity > 0 && (
+                {!!isAddedToCart && quantity >= 1 && (
                   <div className="py-4 px-3">
                     <div className="flex justify-evenly items-center">
                       <img

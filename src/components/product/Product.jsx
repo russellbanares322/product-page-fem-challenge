@@ -8,7 +8,7 @@ import ProductContext from "../../context/ProductContext";
 const Product = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const selectedImage = imageData[imageIndex].image;
-  const { quantity, setQuantity, setIsAddedToCart } =
+  const { quantity, setQuantity, setIsAddedToCart, setIsCartOpen } =
     useContext(ProductContext);
 
   const handleSelectImage = (selectedImageIndex) => {
@@ -18,18 +18,19 @@ const Product = () => {
   const handleAddToCart = () => {
     setIsAddedToCart(true);
     setQuantity((prev) => prev + 1);
+    setIsCartOpen(true);
   };
 
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
-    if (quantity >= 1) {
-      setIsAddedToCart(true);
-    }
+    setIsAddedToCart(true);
+    setIsCartOpen(true);
   };
   const handleDecreaseQuantity = () => {
     setQuantity((prev) => prev - 1);
     if (quantity <= 1) {
       setIsAddedToCart(false);
+      setIsCartOpen(true);
     }
   };
 
