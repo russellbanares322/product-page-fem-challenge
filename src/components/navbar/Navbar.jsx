@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import logo from "../../assets/logo.svg";
-import cart from "../../assets/icon-cart.svg";
 import avatar from "../../assets/image-avatar.png";
-import menu from "../../assets/icon-menu.svg";
-import close from "../../assets/icon-close.svg";
 import ProductContext from "../../context/ProductContext";
 import productImg from "../../assets/image-product-1-thumbnail.jpg";
-import deleteIcon from "../../assets/icon-delete.svg";
+import {
+  NavCloseIcon,
+  MenuIcon,
+  NavCartIcon,
+  DeleteIcon,
+} from "../../assets/icons/Icons";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -22,7 +24,7 @@ const Navbar = () => {
   const multipliedProductPrice = 125 * quantity;
 
   const navListStyle =
-    "cursor-pointer hover:text-black relative hover:before:absolute hover:before:bottom-[-33px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
+    "cursor-pointer text-dark-grayish-blue hover:text-black relative hover:before:absolute hover:before:bottom-[-33px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
 
   const handleToggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -43,23 +45,21 @@ const Navbar = () => {
       <div className="flex justify-center items-center">
         <div className="cursor-pointer mr-3">
           {!isNavOpen && (
-            <img
-              onClick={handleToggleNav}
-              className="visible md:hidden w-4"
-              src={menu}
+            <MenuIcon
+              handleToggleNav={handleToggleNav}
+              menuStyle="visible md:hidden w-4 h-5 fill-current text-dark-grayish-blue cursor-pointer"
             />
           )}
           {!!isNavOpen && (
-            <img
-              onClick={handleToggleNav}
-              className="visible md:hidden w-4"
-              src={close}
+            <NavCloseIcon
+              handleToggleNav={handleToggleNav}
+              navCloseStyle="visible md:hidden w-4 h-5 fill-current text-dark-grayish-blue cursor-pointer"
             />
           )}
         </div>
         <img className="mr-14" src={logo} />
       </div>
-      <ul className="hidden md:text-base md:visible md:flex md:justify-center md:items-center mr-auto md:gap-5 text-base text-dark-grayish-blue">
+      <ul className="hidden md:text-base md:visible md:flex md:justify-center md:items-center mr-auto md:gap-5 text-base">
         <li className={navListStyle}>Collections</li>
         <li className={navListStyle}>Men</li>
         <li className={navListStyle}>Women</li>
@@ -72,10 +72,9 @@ const Navbar = () => {
           onBlur={() => setIsCartOpen(false)}
           className="relative"
         >
-          <img
-            onClick={handleToggleCart}
-            className="fill-orange cursor-pointer w-5 h-5"
-            src={cart}
+          <NavCartIcon
+            handleToggleCart={handleToggleCart}
+            navCartStyle="fill-current text-dark-grayish-blue hover:text-black cursor-pointer"
           />
           {quantity > 0 && (
             <p
@@ -116,17 +115,16 @@ const Navbar = () => {
                           Fall Limited Edition Sneakers
                         </p>
                         <div className="flex justify-start items-center gap-2">
-                          <p>${productPrice}.00</p>
+                          <p>${productPrice.toFixed(2)}</p>
                           <p>x {quantity}</p>
                           <p className="font-bold">
-                            ${multipliedProductPrice}.00
+                            ${multipliedProductPrice.toFixed(2)}
                           </p>
                         </div>
                       </div>
-                      <img
-                        onClick={handleRemoveToCart}
-                        className="w-3 h-4 cursor-pointer"
-                        src={deleteIcon}
+                      <DeleteIcon
+                        handleRemoveToCart={handleRemoveToCart}
+                        iconStyle="w-3 h-4 cursor-pointer"
                       />
                     </div>
                     <button className="w-full bg-orange text-white my-4 h-11 rounded-md">

@@ -1,10 +1,8 @@
 import React, { useState, useContext } from "react";
 import { imageData } from "../../data/ImageData";
-import iconMinus from "../../assets/icon-minus.svg";
-import iconPlus from "../../assets/icon-plus.svg";
-import iconCart from "../../assets/icon-cart.svg";
 import ProductContext from "../../context/ProductContext";
 import ImageModal from "../modal/ImageModal";
+import { MinusIcon, PlusIcon, ButtonCartIcon } from "../../assets/icons/Icons";
 
 const Product = () => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -55,7 +53,7 @@ const Product = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-evenly items-center h-full gap-16">
+      <div className="flex flex-wrap justify-evenly items-center h-full">
         <div className="flex flex-col justify-center items-center gap-5">
           <div>
             <img
@@ -81,12 +79,14 @@ const Product = () => {
             ))}
           </div>
         </div>
-        <div className="h-full w-[27rem]">
-          <p className="text-orange font-bold mb-3">SNEAKER COMPANY</p>
-          <p className="text-black font-bold text-[2.5rem] leading-10 mb-5">
+        <div className="h-full w-[23rem]">
+          <p className="text-orange font-bold mb-3 tracking-wider text-sm">
+            SNEAKER COMPANY
+          </p>
+          <p className="text-black font-bold text-[2.5rem] leading-[2.5rem] mb-5">
             Fall Limited Edition Sneakers
           </p>
-          <p className="text-dark-grayish-blue mb-5">
+          <p className="text-dark-grayish-blue mb-5 text-sm">
             These low-profile sneakers are your perfect casual wear companion.
             Featuring a durable rubber outer sole, they'll withstand everything
             the weather can offer.
@@ -101,32 +101,29 @@ const Product = () => {
             <strike>$250.00</strike>
           </p>
           <div className="flex justify-start items-center gap-3 h-[6rem] text-[0.9rem] font-bold">
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center">
               <button
                 disabled={quantity === 0 ? true : false}
                 onClick={handleDecreaseQuantity}
-                className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center"
+                className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center hover:opacity-75"
               >
-                <img src={iconMinus} />
+                <MinusIcon minusStyle="fill-current text-orange w-5 h-5" />
               </button>
               <button className="bg-light-grayish-blue w-12 h-12">
                 {quantity}
               </button>
               <button
                 onClick={handleIncreaseQuantity}
-                className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center text-orange"
+                className="bg-light-grayish-blue w-12 h-12 flex justify-center items-center hover:opacity-75"
               >
-                <img src={iconPlus} />
+                <PlusIcon plusStyle="fill-current text-orange w-5 h-5" />
               </button>
             </div>
             <button
               onClick={handleAddToCart}
-              className="hover:opacity-50 text-white bg-orange w-full h-11 rounded-md flex justify-center items-center gap-3"
+              className="hover:opacity-50 text-white bg-orange w-full h-11 rounded-lg flex justify-center items-center gap-3"
             >
-              <img
-                className="h-4 w-4 stroke-current text-white"
-                src={iconCart}
-              />
+              <ButtonCartIcon buttonStyle="fill-current text-white" />
               Add to cart
             </button>
           </div>

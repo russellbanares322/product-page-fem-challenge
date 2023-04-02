@@ -1,8 +1,10 @@
-import React from "react";
-import iconClose from "../../assets/icon-close.svg";
-import iconNext from "../../assets/icon-next.svg";
-import iconPrev from "../../assets/icon-previous.svg";
+import React, { useState } from "react";
 import { imageData } from "../../data/ImageData";
+import {
+  ModalCloseIcon,
+  PreviousIcon,
+  NextIcon,
+} from "../../assets/icons/Icons";
 
 const ImageModal = ({
   selectedImage,
@@ -12,17 +14,21 @@ const ImageModal = ({
   handleNextImage,
   handlePrevImage,
 }) => {
+  const [isPrevHovered, setIsPrevHovered] = useState(false);
+  const [isNextHovered, setIsNextHovered] = useState(false);
+  const orange = "hsl(26, 100%, 55%)";
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
   return (
     <div className="bg-black bg-opacity-70  fixed inset-0 flex justify-center items-center">
       <div className="translate-y-[-10px]">
         <div className="flex justify-end items-end mb-3">
-          <img
-            onClick={handleCloseModal}
-            src={iconClose}
-            className="w-[1.2rem] h-[1.2rem] cursor-pointer"
+          <ModalCloseIcon
+            handleCloseModal={handleCloseModal}
+            closeIconStyle="fill-current text-white w-[1.1rem] h-[1.2rem] hover:text-orange cursor-pointer"
           />
         </div>
         <div className="relative">
@@ -31,16 +37,26 @@ const ImageModal = ({
             src={selectedImage}
           />
           <div
+            onMouseEnter={() => setIsPrevHovered(true)}
+            onMouseLeave={() => setIsPrevHovered(false)}
             onClick={handlePrevImage}
             className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute left-[-25px] top-[185px] flex items-center justify-center"
           >
-            <img className="mr-1" src={iconPrev} />
+            <PreviousIcon
+              strokeColor={isPrevHovered ? orange : "black"}
+              prevStyle="mr-1"
+            />
           </div>
           <div
+            onMouseEnter={() => setIsNextHovered(true)}
+            onMouseLeave={() => setIsNextHovered(false)}
             onClick={handleNextImage}
             className="cursor-pointer bg-white rounded-full w-[45px] h-[45px] absolute right-[-25px] top-[185px] flex items-center justify-center"
           >
-            <img className="ml-1" src={iconNext} />
+            <NextIcon
+              strokeColor={isNextHovered ? orange : "black"}
+              nextStyle="ml-1"
+            />
           </div>
         </div>
         <div className="flex justify-center items-center gap-5 mt-7">
@@ -48,7 +64,7 @@ const ImageModal = ({
             <div className="relative" key={index}>
               <img
                 onClick={() => handleSelectImage(index)}
-                className={`rounded-lg h-[4.4rem] w-[4.3rem] object-cover cursor-pointer hover:opacity-50 ${
+                className={`rounded-lg h-[4.4rem] w-[4.3rem] object-cover cursor-pointer ${
                   index === imageIndex && "border-2 border-orange z-50"
                 }`}
                 src={img.thumbnail}
