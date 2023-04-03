@@ -45,6 +45,8 @@ const ImageModal = ({
             <PreviousIcon
               strokeColor={isPrevHovered ? orange : "black"}
               prevStyle="mr-1"
+              height="18"
+              width="13"
             />
           </div>
           <div
@@ -56,6 +58,8 @@ const ImageModal = ({
             <NextIcon
               strokeColor={isNextHovered ? orange : "black"}
               nextStyle="ml-1"
+              height="18"
+              width="13"
             />
           </div>
         </div>
@@ -64,7 +68,7 @@ const ImageModal = ({
             <div className="relative" key={index}>
               <img
                 onClick={() => handleSelectImage(index)}
-                className={`rounded-lg h-[4.4rem] w-[4.3rem] object-cover cursor-pointer ${
+                className={`rounded-lg h-[4.4rem] w-[4.3rem] object-cover cursor-pointer hover:opacity-50 ${
                   index === imageIndex && "border-2 border-orange z-50"
                 }`}
                 src={img.thumbnail}

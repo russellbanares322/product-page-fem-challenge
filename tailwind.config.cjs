@@ -18,7 +18,7 @@ module.exports = {
     },
     screens: {
       sm: "24em",
-      md: "70em",
+      md: "75em",
     },
   },
   plugins: [],

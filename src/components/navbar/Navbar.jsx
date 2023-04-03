@@ -37,11 +37,10 @@ const Navbar = () => {
 
   const handleRemoveToCart = () => {
     setIsAddedToCart(false);
-    setQuantity(0);
   };
 
   return (
-    <nav className="mb-0 md:mb-20 flex justify-between items-center py-6 md:border-b md:border-grayish-blue px-4 md:px-0 md:border-opacity-50">
+    <nav className="mb-0 md:mb-20 flex justify-between items-center h-[3rem] md:h-[5rem] md:py-6 py-7 md:border-b md:border-grayish-blue px-4 md:px-0 md:border-opacity-50">
       <div className="flex justify-center items-center">
         <div className="cursor-pointer mr-3">
           {!isNavOpen && (
@@ -124,7 +123,7 @@ const Navbar = () => {
                       </div>
                       <DeleteIcon
                         handleRemoveToCart={handleRemoveToCart}
-                        iconStyle="w-3 h-4 cursor-pointer"
+                        deleteStyle="cursor-pointer fill-current text-grayish-blue"
                       />
                     </div>
                     <button className="w-full bg-orange text-white my-4 h-11 rounded-md">
