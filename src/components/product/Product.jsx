@@ -68,7 +68,7 @@ const Product = () => {
               src={selectedImage}
             />
             <img
-              className="block md:hidden w-full h-[20rem] object-center object-cover"
+              className="block md:hidden w-full h-[20rem] object-center object-cover bg-cover"
               src={selectedImage}
             />
             <div

@@ -24,7 +24,7 @@ const Navbar = () => {
   const multipliedProductPrice = 125 * quantity;
 
   const navListStyle =
-    "cursor-pointer text-dark-grayish-blue hover:text-black relative hover:before:absolute hover:before:bottom-[-33px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
+    "cursor-pointer text-dark-grayish-blue hover:text-black relative hover:before:absolute hover:before:bottom-[-27px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
   const mobileNavListStyle = "cursor-pointer text-black font-bold";
 
   const handleToggleNav = () => {
