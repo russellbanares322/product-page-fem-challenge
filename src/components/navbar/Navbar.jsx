@@ -37,6 +37,8 @@ const Navbar = () => {
 
   const handleRemoveToCart = () => {
     setIsAddedToCart(false);
+    setQuantity(0);
+    setIsCartOpen(false);
   };
 
   return (
@@ -78,7 +80,7 @@ const Navbar = () => {
           {quantity > 0 && (
             <p
               onClick={handleToggleCart}
-              className="cursor-pointer absolute top-[-5px] right-[-8px] text-[0.6rem] bg-orange w-5 rounded-full h-3 text-center text-white"
+              className="cursor-pointer absolute top-[12px] right-[-6px] text-[0.6rem] bg-orange w-5 rounded-full h-3 text-center text-white"
             >
               {quantity}
             </p>
