@@ -105,9 +105,9 @@ const Navbar = () => {
           )}
           {isCartOpen && (
             <div
-              className={`absolute top-10 z-20 ${
+              className={`absolute top-[3.8rem] md:top-10 z-20 w-[18rem] shadow-2xl right-[-30px] md:right-[-100px] bg-white rounded-md ${
                 !isAddedToCart && quantity === 0 ? "h-[11rem]" : "h-auto"
-              }  w-[18rem] shadow-2xl right-[-20px] md:right-[-100px] bg-white rounded-md`}
+              }  `}
             >
               <p className="font-bold border-b border-grayish-blue p-3 border-opacity-50">
                 Cart
@@ -146,7 +146,7 @@ const Navbar = () => {
                         deleteStyle="cursor-pointer fill-current text-grayish-blue"
                       />
                     </div>
-                    <button className="w-full bg-orange text-white my-4 h-11 rounded-md">
+                    <button className="w-full bg-orange text-white my-4 h-11 rounded-md text-sm">
                       Checkout
                     </button>
                   </div>
