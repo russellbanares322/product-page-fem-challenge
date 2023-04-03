@@ -128,11 +128,11 @@ const Product = () => {
             <p className="bg-pale-orange text-orange font-bold px-2 rounded-md mr-auto text-sm">
               50%
             </p>
-            <p className="visible md:hidden text-dark-grayish-blue text-sm">
+            <p className="block md:hidden text-dark-grayish-blue text-sm">
               <strike>$250.00</strike>
             </p>
           </div>
-          <p className="hidden md:visible text-dark-grayish-blue text-sm">
+          <p className="hidden md:block text-dark-grayish-blue text-sm">
             <strike>$250.00</strike>
           </p>
           <div className="flex md:flex-nowrap flex-wrap  w-full justify-start items-center gap-3 h-[6rem] text-[0.9rem] font-bold">
