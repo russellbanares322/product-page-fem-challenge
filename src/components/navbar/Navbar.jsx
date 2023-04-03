@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const navListStyle =
     "cursor-pointer text-dark-grayish-blue hover:text-black relative hover:before:absolute hover:before:bottom-[-33px] hover:before:h-1 hover:before:w-[100%] hover:before:bg-orange hover:before:rounded-xl";
+  const mobileNavListStyle = "cursor-pointer text-black font-bold";
 
   const handleToggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -51,12 +52,6 @@ const Navbar = () => {
               menuStyle="visible md:hidden w-4 h-5 fill-current text-dark-grayish-blue cursor-pointer"
             />
           )}
-          {!!isNavOpen && (
-            <NavCloseIcon
-              handleToggleNav={handleToggleNav}
-              navCloseStyle="visible md:hidden w-4 h-5 fill-current text-dark-grayish-blue cursor-pointer"
-            />
-          )}
         </div>
         <img className="mr-14" src={logo} />
       </div>
@@ -67,6 +62,29 @@ const Navbar = () => {
         <li className={navListStyle}>About</li>
         <li className={navListStyle}>Contact</li>
       </ul>
+      {!!isNavOpen && (
+        <div className="bg-black bg-opacity-70 fixed inset-0 z-50">
+          <div
+            className={`visible md:hidden w-1/2 fixed top-0 left-0 h-full bg-white transform-none ${
+              !isNavOpen
+                ? "transform translate-x-0"
+                : "transition duration-500 ease-in-out transform translate-x-[-160vh]"
+            }`}
+          >
+            <NavCloseIcon
+              handleToggleNav={handleToggleNav}
+              navCloseStyle="w-4 h-5 fill-current text-dark-grayish-blue cursor-pointer mt-5 mx-5"
+            />
+            <ul className="flex flex-col gap-3 pt-14 px-5">
+              <li className={mobileNavListStyle}>Collections</li>
+              <li className={mobileNavListStyle}>Men</li>
+              <li className={mobileNavListStyle}>Women</li>
+              <li className={mobileNavListStyle}>About</li>
+              <li className={mobileNavListStyle}>Contact</li>
+            </ul>
+          </div>
+        </div>
+      )}
       <div className="flex justify-center items-center">
         <div
           tabIndex={0}
@@ -87,9 +105,9 @@ const Navbar = () => {
           )}
           {isCartOpen && (
             <div
-              className={`absolute top-10 ${
+              className={`absolute top-10 z-20 ${
                 !isAddedToCart && quantity === 0 ? "h-[11rem]" : "h-auto"
-              }  w-[18rem] shadow-2xl right-[-5px] md:right-[-100px] bg-white rounded-md`}
+              }  w-[18rem] shadow-2xl right-[-20px] md:right-[-100px] bg-white rounded-md`}
             >
               <p className="font-bold border-b border-grayish-blue p-3 border-opacity-50">
                 Cart
